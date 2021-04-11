@@ -6,8 +6,8 @@ namespace App\TableInfo;
 
 class PostCategoriaTableInfo
 {
-    const TABLE_NAME = 'post_categoria';
+    const TABLE_NAME = 'categoria_post';
     const ID = 'id';
-    const POST = 'posts_id';
-    const CATEGORIA = 'categorias_id';
+    const POST = 'post_id';
+    const CATEGORIA = 'categoria_id';
 }

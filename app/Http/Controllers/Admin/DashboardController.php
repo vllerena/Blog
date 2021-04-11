@@ -11,7 +11,6 @@ class DashboardController extends Controller
     public function index()
     {
         $posts = Post::first();
-        return $posts->user;
         return view('admin.dashboard.index');
     }
 }
