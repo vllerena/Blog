@@ -38,7 +38,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{route('admin.tag.create')}}">
                                     <i data-feather="gift" class="icons-xs mr-2"></i>
                                     <span> Crear Tag </span>
                                 </a>
@@ -64,6 +64,29 @@
                                 <a href="{{route('admin.categoria.create')}}">
                                     <i data-feather="gift" class="icons-xs mr-2"></i>
                                     <span> Crear Categoria </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarPost" data-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span> Post </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarPost">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{route('admin.post.index')}}">
+                                    <i data-feather="gift" class="icons-xs mr-2"></i>
+                                    <span> Listar Post </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('admin.post.create')}}">
+                                    <i data-feather="gift" class="icons-xs mr-2"></i>
+                                    <span> Crear Post </span>
                                 </a>
                             </li>
                         </ul>

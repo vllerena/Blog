@@ -1,4 +1,4 @@
-@extends('livewire.layout.main', ['title' => 'Categoria'])
+@extends('livewire.layout.main', ['title' => 'Post'])
 @section('css')
     <link href="{{asset('assets/libs/jquery-toast-plugin/jquery-toast-plugin.min.css')}}" rel="stylesheet"
           type="text/css"/>
@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title">Gestionar Categorias</h4>
+                    <h4 class="page-title">Gestionar Post</h4>
                 </div>
             </div>
         </div>
@@ -16,8 +16,8 @@
             <div class="col-12">
                 <div class="card-box">
                     <div class="text-lg-left mt-3 mt-lg-0 mb-3 mr-2">
-                        <a href="{{route('admin.categoria.create')}}" type="button" class="btn btn-success waves-effect waves-light">
-                            <span class="btn-label"><i class="mdi mdi-plus-circle"></i></span>Registar Categoria
+                        <a href="{{route('admin.post.create')}}" type="button" class="btn btn-success waves-effect waves-light">
+                            <span class="btn-label"><i class="mdi mdi-plus-circle"></i></span>Registar Post
                         </a>
                     </div>
                     <div class="mb-2">
@@ -60,29 +60,57 @@
                                data-page-size="7">
                             <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th data-hide="phone, tablet">Post Asociados</th>
-                                <th data-hide="phone, tablet">Slug</th>
+                                <th data-toggle="true">Titulo</th>
+                                <th>Autor</th>
+                                <th>Categoria</th>
+                                <th>Tag</th>
+                                <th data-hide="phone, tablet">Vistas</th>
                                 <th data-hide="phone, tablet">Imagen</th>
+                                <th data-hide="phone, tablet">Estado</th>
+                                <th data-hide="phone, tablet">Aprobado</th>
+                                <th data-hide="phone, tablet">Fecha</th>
                                 <th data-hide="phone, tablet">Opciones</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($categorias as $c)
+                            @foreach ($posts as $p)
                                 <tr>
-                                    <td>{{$c->name}}</td>
-                                    <td>{{$c->posts->count()}}</td>
-                                    <td>{{$c->slug}}</td>
+                                    <td>{{$p->title}}</td>
+                                    <td>{{$p->user->name}}</td>
                                     <td>
-                                        <img src="{{asset('storage/categoria/'. $c->image)}}" alt="Imagen" width="80" height="40">
+                                        @foreach($p->categorias as $c)
+                                            {{$c->name}}
+                                        @endforeach
                                     </td>
                                     <td>
+                                        @foreach($p->tags as $t)
+                                            {{$t->name}}
+                                        @endforeach
+                                    </td>
+                                    <td>{{$p->view_count}}</td>
+                                    <td>{{$p->image}}</td>
+                                    <td>
+                                        @if($p->status == 0)
+                                            <span class="badge badge-soft-danger p-2">Borrador</span>
+                                        @else
+                                            <span class="badge badge-soft-success p-2">Publicado</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($p->is_approved == 0)
+                                            <span class="badge badge-soft-danger p-2">Pendiente</span>
+                                        @else
+                                            <span class="badge badge-soft-success p-2">Aprobado</span>
+                                        @endif
+                                    </td>
+                                    <td>{{$p->created_at}}</td>
+                                    <td>
                                         <div class="row">
-                                            <a href="{{ route('admin.categoria.edit', ['categoria' => $c]) }}" type="button"
+                                            <a href="{{ route('admin.post.edit', ['post' => $p]) }}" type="button"
                                                class="btn btn-soft-warning btn-sm waves-effect waves-light ml-2 mr-1">
                                                 <span class="btn-label"><i class="mdi mdi-plus-circle"></i></span>Editar
                                             </a>
-                                            <form action="{{route('admin.categoria.destroy', ['categoria' => $c])}}" method="POST">
+                                            <form action="{{route('admin.post.destroy', ['post' => $p])}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-soft-danger btn-sm waves-effect waves-light ml-2 mr-1">
@@ -96,7 +124,7 @@
                             </tbody>
                             <tfoot>
                             <tr class="active">
-                                <td colspan="5">
+                                <td colspan="10">
                                     <div class="text-right">
                                         <ul class="pagination pagination-rounded justify-content-end footable-pagination m-t-10 mb-0"></ul>
                                     </div>

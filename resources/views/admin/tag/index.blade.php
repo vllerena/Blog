@@ -60,8 +60,8 @@
                                data-page-size="7">
                             <thead>
                             <tr>
-                                <th data-toggle="true">Id</th>
                                 <th>Nombre</th>
+                                <th data-hide="phone, tablet">Posts Asociados</th>
                                 <th data-hide="phone, tablet">Slug</th>
                                 <th data-hide="phone, tablet">Opciones</th>
                             </tr>
@@ -69,8 +69,8 @@
                             <tbody>
                             @foreach ($tags as $t)
                                 <tr>
-                                    <td>{{$t->id}}</td>
                                     <td>{{$t->name}}</td>
+                                    <td>{{$t->posts->count()}}</td>
                                     <td>{{$t->slug}}</td>
                                     <td>
                                         <div class="row">
