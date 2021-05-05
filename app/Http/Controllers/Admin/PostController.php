@@ -79,4 +79,12 @@ class PostController extends Controller
 
         return redirect()->route('admin.post.index')->with('status', 'Post registrado correctamente.');
     }
+
+    public function edit(Post $post)
+    {
+        $categorias = Categoria::all();
+        $tags = Tag::all();
+        return view('admin.post.edit', compact('categorias', 'tags', 'post'));
+
+    }
 }
